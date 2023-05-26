@@ -1,0 +1,41 @@
+[
+  {
+    "name": "dev",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "123456789",
+    "database": "yourcar",
+    "entities": ["dist/**/entities/*{.ts,.js}"],
+    "synchronize": true,
+    "migrations": ["src/migrations/*.ts"],
+    "cli": {
+      "migrationsDir": "src/migrations"
+    },
+    "extensions": {
+      "uuid-ossp": true
+    }
+  },
+  {
+    "name": "prod",
+    "type": "postgres",
+    "host": "containers-us-west-111.railway.app",
+    "port": 7788,
+    "username": "postgres",
+    "password": "Ab8n8fqA3IAfkcc2avbe",
+    "database": "railway",
+    "ssl": true,
+    "entities": ["dist/**/entities/*{.ts,.js}"],
+    "synchronize": true,
+    "migrationRun": true,
+    "migrations": ["dist/migrations/*{.ts,.js}"],
+    "cli": {
+      "migrationsDir": "src/migrations"
+    },
+    "extensions": {
+      "uuid-ossp": true
+    }
+  }
+]
+
