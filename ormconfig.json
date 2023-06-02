@@ -16,7 +16,7 @@
     "extensions": {
       "uuid-ossp": true
     }
-  },
+  },  
   {
     "name": "prod",
     "type": "postgres",

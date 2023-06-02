@@ -1,20 +1,35 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { ProfileService } from '../components/profileService/Profile.service';
 
 @Controller('profile')
 export class ProfileController {
+  constructor(private readonly profileService: ProfileService) {}
+
   @Post()
-  saveProfile(@Body() profileData: any) {
-    // Generate a new ID on the server
-    const newId = Date.now().toString();
+  async saveProfile(@Body() profileData: any) {
+    try {
+      const { userId } = profileData; // Assuming the user ID is included in the profileData object
+      const savedProfile = await this.profileService.createProfile(
+        userId,
+        profileData,
+      );
 
-    // Add the generated ID to the profile data
-    profileData.id = newId;
-
-    // Handle and save the profile data here
-    console.log('Generated ID:', newId);
-    console.log('Profile Data:', profileData);
-
-    // Return a response with the profile data
-    return { message: 'Profile saved successfully' };
+      console.log('Saved Profile:', savedProfile);
+      return { message: 'Profile saved successfully', profile: savedProfile };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+  @Get(':userId')
+  async getProfile(@Param('userId') userId: string) {
+    try {
+      const profile = await this.profileService.getProfile(userId);
+      console.log('Profile:', profile);
+      return { profile };
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
   }
 }
