@@ -9,19 +9,19 @@ export class Profile {
   @Column({ default: '' })
   userId: string; // Firebase user ID
 
-  @Column()
+  @Column({ nullable: true })
   profileImage: string;
 
-  @Column()
+  @Column({ nullable: true })
   specialty: string;
 
-  @Column()
+  @Column({ nullable: true })
   availability: string;
 
-  @Column()
+  @Column({ nullable: true })
   location: string;
 
-  @Column()
+  @Column({ nullable: true })
   contactInfo: string;
 
   @OneToMany(() => ExperienceEntry, (entry) => entry.profile, {
@@ -30,6 +30,6 @@ export class Profile {
   })
   experienceEntries: ExperienceEntry[];
 
-  @Column()
+  @Column({ nullable: true })
   gender: string;
 }

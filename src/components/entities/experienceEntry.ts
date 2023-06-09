@@ -6,16 +6,16 @@ export class ExperienceEntry {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   startDate: string;
 
-  @Column()
+  @Column({ nullable: true })
   endDate: string;
 
   @ManyToOne(() => Profile, (profile) => profile.experienceEntries)
