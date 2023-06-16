@@ -10,6 +10,9 @@ export class Profile {
   userId: string; // Firebase user ID
 
   @Column({ nullable: true })
+  fullName: string;
+
+  @Column({ nullable: true })
   profileImage: string;
 
   @Column({ nullable: true })

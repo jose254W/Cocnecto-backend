@@ -21,12 +21,24 @@ export class ProfileController {
       throw error;
     }
   }
-  @Get(':userId')
-  async getProfile(@Param('userId') userId: string) {
+  // @Get(':userId')
+  // async getProfile(@Param('userId') userId: string) {
+  //   try {
+  //     const profile = await this.profileService.getProfile(userId);
+  //     console.log('Profile:', profile);
+  //     return { profile };
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     throw error;
+  //   }
+  // }
+
+  @Get('all')
+  async getAllProfiles() {
     try {
-      const profile = await this.profileService.getProfile(userId);
-      console.log('Profile:', profile);
-      return { profile };
+      const profiles = await this.profileService.getAllProfiles();
+      console.log('Successful:');
+      return { profiles };
     } catch (error) {
       console.error('Error:', error);
       throw error;
