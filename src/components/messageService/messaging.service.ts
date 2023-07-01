@@ -17,10 +17,13 @@ export class MessagingService {
     return this.messageRepository.find();
   }
 
-  async handleMessage(sender: string, content: string, recipientId: string) {
-    const newMessage = { sender, content };
+  async handleMessage(sender: string, content: string, userId: string) {
+    console.log('Received message:', { sender, content, userId });
+    const newMessage = { sender, content, userId };
     const savedMessage = await this.createMessage(newMessage);
-    this.sendMessage(savedMessage, recipientId);
+    console.log('Saved message:', savedMessage);
+    this.sendMessage(savedMessage, userId);
+    console.log('Message sent to recipient');
   }
 
   async createMessage(message: Partial<Message>): Promise<Message> {
@@ -28,13 +31,12 @@ export class MessagingService {
     return this.messageRepository.save(newMessage);
   }
 
-  sendMessage(message: Message, recipientId: string) {
-    const recipientSocket = this.connectedUsers.get(recipientId);
+  sendMessage(message: Message, userId: string) {
+    const recipientSocket = this.connectedUsers.get(userId);
     if (recipientSocket) {
       recipientSocket.emit('message', message);
     } else {
-      // Handle recipient not found error
-      console.log(`Recipient with ID ${recipientId} not found.`);
+      console.log(`Recipient with ID ${userId} not found.`);
     }
   }
 

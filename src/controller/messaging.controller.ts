@@ -1,26 +1,22 @@
 import { Controller, Get, Post, Body, OnModuleInit } from '@nestjs/common';
 import { MessagingService } from '../components/messageService/messaging.service';
-import { Socket } from 'socket.io';
 
 @Controller('messaging')
 export class MessagingController implements OnModuleInit {
   constructor(private readonly messagingService: MessagingService) {}
 
   onModuleInit() {
-    // Simulate server connection and registering event handler
-    const mockSocket = {} as Socket; // Replace with the actual socket instance
-    const userId = '123'; // Replace with the user ID of the connected user
-    this.messagingService.addUser(userId, mockSocket);
+    // No need for additional code in this method
   }
 
   @Post('send')
-  sendMessage(
-    @Body() message: { sender: string; content: string; recipientId: string },
+  async sendMessage(
+    @Body() message: { sender: string; content: string; userId: string },
   ) {
-    this.messagingService.handleMessage(
+    await this.messagingService.handleMessage(
       message.sender,
       message.content,
-      message.recipientId,
+      message.userId,
     );
   }
 

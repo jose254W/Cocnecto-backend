@@ -5,6 +5,9 @@ export class Message {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  userId: string;
+
   @Column()
   sender: string;
 
