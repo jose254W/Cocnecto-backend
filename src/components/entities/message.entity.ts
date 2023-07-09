@@ -14,6 +14,9 @@ export class Message {
   @Column()
   content: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    default: () => `now() at time zone 'UTC' at time zone 'Africa/Nairobi'`,
+  })
   timestamp: Date;
 }
