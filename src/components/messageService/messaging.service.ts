@@ -17,6 +17,20 @@ export class MessagingService {
     return this.messageRepository.find();
   }
 
+  async getAllUserChats(): Promise<string[]> {
+    // Fetch all distinct sender IDs from the messages
+    const senders = await this.messageRepository.query(
+      `SELECT DISTINCT "sender" FROM "message"`,
+    );
+
+    // Extract sender IDs from the results
+    const senderIds = senders.map(
+      (sender: { senderId: any }) => sender.senderId,
+    );
+
+    return senderIds;
+  }
+
   async handleMessage(sender: string, content: string, userId: string) {
     console.log('Received message:', { sender, content, userId });
     const newMessage = { sender, content, userId };

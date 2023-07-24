@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, OnModuleInit } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  OnModuleInit,
+  Param,
+} from '@nestjs/common';
 import { MessagingService } from '../components/messageService/messaging.service';
 
 @Controller('messaging')
@@ -23,5 +30,10 @@ export class MessagingController implements OnModuleInit {
   @Get('receive')
   async getAllMessages() {
     return this.messagingService.getAllMessages();
+  }
+
+  @Get('senders')
+  async getAllUserChats() {
+    return this.messagingService.getAllUserChats();
   }
 }
