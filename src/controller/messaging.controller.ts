@@ -32,8 +32,10 @@ export class MessagingController implements OnModuleInit {
     return this.messagingService.getAllMessages();
   }
 
-  @Get('senders')
-  async getAllUserChats() {
-    return this.messagingService.getAllUserChats();
+  // MessagingController
+
+  @Get('messages/sender/:sender')
+  async getUserMessages(@Param('senderId') senderId: string) {
+    return this.messagingService.getUserMessages(senderId);
   }
 }
