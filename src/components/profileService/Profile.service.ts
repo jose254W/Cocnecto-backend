@@ -27,20 +27,20 @@ export class ProfileService {
     return this.profileRepository.save(newProfile);
   }
 
-  // async getProfile(userId: string): Promise<Profile> {
-  //   try {
-  //     const profile = await this.profileRepository.findOne({
-  //       where: { userId },
-  //     });
-  //     if (!profile) {
-  //       throw new Error('Profile not found');
-  //     }
-  //     return profile;
-  //   } catch (error) {
-  //     console.error(error);
-  //     throw error;
-  //   }
-  // }
+  async getProfile(userId: string): Promise<Profile> {
+    try {
+      const profile = await this.profileRepository.findOne({
+        where: { userId },
+      });
+      if (!profile) {
+        throw new Error('Profile not found');
+      }
+      return profile;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 
   async getAllProfiles(): Promise<Profile[]> {
     try {
